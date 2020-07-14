@@ -3,10 +3,14 @@
 
 class Valve {
 public:
+  bool on;
+
   Valve(bool is_on);
+
   void turn_on();
   void turn_off();
-  bool on;
+  bool is_on();
+  bool is_off();
 };
 
 #endif

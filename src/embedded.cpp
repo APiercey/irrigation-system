@@ -1,3 +1,4 @@
+#ifdef EMBEDDED
 #include "time.h"
 #include <Arduino.h>
 #include <MQTT.h>
@@ -119,3 +120,4 @@ void loop() {
     mqtt.publish(WiFi.macAddress(), "world");
   }
 }
+#endif

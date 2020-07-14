@@ -26,5 +26,8 @@ uploadfs:
 update:
 	platformio -f -c vim update
 
-tests:
-	platformio test --verbose
+test_native:
+	platformio test -e native --verbose
+
+test_esp32:
+	platformio test -e esp32dev --verbose

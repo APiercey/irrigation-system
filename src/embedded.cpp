@@ -4,8 +4,8 @@
 #include <MQTT.h>
 #include <WiFi.h>
 
-const char *ssid = "TheTechLab";             //  your network SSID (name)
-const char *password = "AWildGooseAppeared"; // your network password
+const char *ssid = "";     //  your network SSID (name)
+const char *password = ""; // your network password
 unsigned long lastMillis = 0;
 
 const char *ntpServer = "pool.ntp.org";

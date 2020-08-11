@@ -4,10 +4,12 @@
 
 class BoardManager {
 public:
-  BoardManager(int valve_pin);
   int valve_pin;
-  void consume_event(ValveTurnedOn *event);
-  void consume_event(ValveTurnedOff *event);
+
+  BoardManager(int valve_pin);
+
+  void consume_event(ValveTurnedOn &event);
+  void consume_event(ValveTurnedOff &event);
 };
 
 #endif

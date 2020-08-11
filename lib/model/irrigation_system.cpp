@@ -1,4 +1,5 @@
 #include "time.h"
+#include <commands.h>
 #include <events.h>
 #include <irrigation_system.h>
 #include <schedule.h>
@@ -13,18 +14,21 @@ void IrrigationSystem::monitor_schedule(Event *events) {
   int event_count = 0;
 
   if (valve.is_off() && schedule.on_schedule()) {
-    valve.turn_on();
-    events[event_count++] = SystemTurnedOn(now);
+    events[event_count++] = ValveTurnedOn(now);
   }
 
   if (valve.is_off() && schedule.expired()) {
-    valve.turn_off();
-    events[event_count++] = SystemTurnedOff(now);
+    events[event_count++] = ValveTurnedOff(now);
   }
 }
 
-void IrrigationSystem::set_schedule(time_t start_time, time_t end_time) {
-  schedule = Schedule(start_time, end_time);
+ScheduleChanged IrrigationSystem::execute(SetSchedule command) {
+  return ScheduleChanged(command.start_time, command.end_time);
 }
 
-void IrrigationSystem::stop() { set_schedule(0, 0); }
+void IrrigationSystem::apply(ScheduleChanged event) {
+  schedule = Schedule(event.start_time, event.end_time);
+}
+
+void IrrigationSystem::apply(ValveTurnedOn event) { valve.turn_on(); }
+void IrrigationSystem::apply(ValveTurnedOff event) { valve.turn_off(); }

@@ -1,5 +1,6 @@
 #ifndef IRRIGATION_SYSTEM_H
 #define IRRIGATION_SYSTEM_H
+#include <commands.h>
 #include <schedule.h>
 #include <valve.h>
 
@@ -9,9 +10,11 @@ public:
   Valve valve;
   IrrigationSystem(Valve valve);
 
-  void set_schedule(time_t start_time, time_t end_time);
+  ScheduleChanged execute(SetSchedule command);
+  void apply(ScheduleChanged event);
+  void apply(ValveTurnedOn event);
+  void apply(ValveTurnedOff event);
   void monitor_schedule(Event *events);
-  void stop();
 };
 
 #endif
